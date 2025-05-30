@@ -1,0 +1,1 @@
+# Solution for The Odin Project's Project: Linked Lists
