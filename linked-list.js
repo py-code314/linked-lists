@@ -28,7 +28,13 @@ export default class LinkedList {
     this.size++
   }
 
-
+  // Add node at the beginning of the list
+  prepend(value) {
+    let currentNode = this.head
+    const node = new Node(value, currentNode)
+    this.head = node
+    this.size++
+  }
 
   // Print all values in the list in a specific format
   toString() {
