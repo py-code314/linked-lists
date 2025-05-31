@@ -6,8 +6,8 @@ import Node from './node.js'
 // Create a class to add, remove nodes to a linked list
 export default class LinkedList {
   constructor() {
-    this.size = 0
-    this.head = null
+    this.length = 0
+    this.headNode = null
     // this.tail = null
   }
 
@@ -15,31 +15,68 @@ export default class LinkedList {
   append(value) {
     const node = new Node(value)
 
-    if (!this.head) {
-      this.head = node
+    if (!this.headNode) {
+      this.headNode = node
     } else {
-      let currentNode = this.head
+      let currentNode = this.headNode
       while (currentNode.nextNode) {
         currentNode = currentNode.nextNode
       }
       currentNode.nextNode = node
     }
 
-    this.size++
+    this.length++
   }
 
   // Add node at the beginning of the list
   prepend(value) {
-    let currentNode = this.head
+    let currentNode = this.headNode
     const node = new Node(value, currentNode)
-    this.head = node
-    this.size++
+    this.headNode = node
+    this.length++
+  }
+
+  // Return total number of nodes in the list
+  size() {
+    return this.length
+  }
+
+  // Return first node in the list
+  head() {
+    return this.headNode.value
+  }
+
+  // Returns the last node in the list
+  tail() {
+    let currentNode = this.headNode
+
+    while (currentNode.nextNode) {
+      currentNode = currentNode.nextNode
+    }
+    return currentNode.value
+  }
+
+  at(index) {
+    let currentNode = this.headNode
+    let currentIndex = 0
+
+    if (index < currentIndex || index === this.length) {
+      return null
+    } else if (index === currentIndex) {
+      return currentNode.value
+    } else {
+      while (currentIndex < index) {
+        currentIndex++
+        currentNode = currentNode.nextNode
+      }
+      return currentNode.value
+    }
   }
 
   // Print all values in the list in a specific format
   toString() {
     let linkedListString = ''
-    let currentNode = this.head
+    let currentNode = this.headNode
 
     while (currentNode) {
       let currentValue = currentNode.value.toString()
