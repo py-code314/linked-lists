@@ -77,7 +77,7 @@ export default class LinkedList {
   // Remove last node in the list
   pop() {
     if (!this.length) {
-      return
+      return null
     } else if (this.length === 1) {
       this.headNode = null
     } else {
@@ -108,10 +108,29 @@ export default class LinkedList {
           return true
         } else {
           currentNode = currentNode.nextNode
-          
         }
       }
       return false
+    }
+  }
+
+  // Return the index of node which contains the given value
+  find(value) {
+    if (!this.length) {
+      return null
+    } else {
+      let currentNode = this.headNode
+      let currentIndex = 0
+
+      while (currentNode) {
+        if (currentNode.value === value) {
+          return currentIndex
+        } else {
+          currentIndex++
+          currentNode = currentNode.nextNode
+        }
+      }
+      return null
     }
   }
 
