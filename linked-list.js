@@ -56,6 +56,7 @@ export default class LinkedList {
     return currentNode.value
   }
 
+  // Returns the node at a given index
   at(index) {
     let currentNode = this.headNode
     let currentIndex = 0
@@ -71,6 +72,26 @@ export default class LinkedList {
       }
       return currentNode.value
     }
+  }
+
+  // Remove last node in the list
+  pop() {
+    if (!this.length) {
+      return
+    } else if (this.length === 1) {
+      this.headNode = null
+    } else {
+      let currentNode = this.headNode
+      let previousNode
+
+      while (currentNode.nextNode) {
+        previousNode = currentNode
+        currentNode = currentNode.nextNode
+      }
+      previousNode.nextNode = null
+    }
+
+    this.length--
   }
 
   // Print all values in the list in a specific format
