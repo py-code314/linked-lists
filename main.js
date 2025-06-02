@@ -12,7 +12,8 @@ ll.append(40)
 // console.log(ll.contains(20))
 // console.log(ll.find(50))
 
-ll.insertAt(50, 5)
+// ll.insertAt(50, 5)
+ll.removeAt(4)
 ll.toString()
 
 // console.dir(ll, { depth: null })
