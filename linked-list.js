@@ -140,11 +140,35 @@ export default class LinkedList {
     let currentNode = this.headNode
 
     while (currentNode) {
-      let currentValue = currentNode.value.toString()
-      linkedListString += ` (${currentValue}) ->`
+      let currentValue = currentNode.value
+      linkedListString += `(${currentValue}) -> `
       currentNode = currentNode.nextNode
     }
 
-    console.log(linkedListString + ' null')
+    linkedListString += `${currentNode}`
+    console.log(linkedListString)
+  }
+
+  // Insert node at given index
+  insertAt(value, index) {
+    const node = new Node(value)
+    let currentNode = this.headNode
+    let previousNode
+    let currentIndex = 0
+
+    if (index < currentIndex || index > this.length) {
+      return null
+    } else if (index === 0) {
+      this.headNode = node
+      node.nextNode = currentNode
+    } else {
+      while (currentIndex < index) {
+        currentIndex++
+        previousNode = currentNode
+        currentNode = currentNode.nextNode
+      }
+      previousNode.nextNode = node
+      node.nextNode = currentNode
+    }
   }
 }
