@@ -9,6 +9,6 @@ ll.append(40)
 // console.log(ll.head())
 // console.log(ll.tail())
 // console.log(ll.at(4))
-
-console.dir(ll, { depth: null })
+// console.log(ll.contains(20))
+// console.dir(ll, { depth: null })
 // ll.toString()

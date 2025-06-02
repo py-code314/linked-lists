@@ -94,6 +94,27 @@ export default class LinkedList {
     this.length--
   }
 
+  // Returns true if the value is in the list
+  contains(value) {
+    if (!this.length) {
+      return false
+    } else if (this.length === 1 && this.headNode.value === value) {
+      return true
+    } else {
+      let currentNode = this.headNode
+
+      while (currentNode) {
+        if (currentNode.value === value) {
+          return true
+        } else {
+          currentNode = currentNode.nextNode
+          
+        }
+      }
+      return false
+    }
+  }
+
   // Print all values in the list in a specific format
   toString() {
     let linkedListString = ''
