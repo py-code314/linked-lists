@@ -1,62 +1,65 @@
+// Import the Node class
 import Node from './node.js'
 
-// const n1 = new Node(40)
-// console.log(n1)
-
-// Create a class to add, remove nodes to a linked list
+/* Create a class to manage a linked list */
 export default class LinkedList {
   constructor() {
     this.length = 0
     this.headNode = null
-    // this.tail = null
   }
 
-  // Append a node to the end of list
+  /* Adds a new node at the end of the linked list */
   append(value) {
-    const node = new Node(value)
+    const newNode = new Node(value)
 
     if (!this.headNode) {
-      this.headNode = node
+      this.headNode = newNode
     } else {
       let currentNode = this.headNode
+
       while (currentNode.nextNode) {
         currentNode = currentNode.nextNode
       }
-      currentNode.nextNode = node
+
+      currentNode.nextNode = newNode
     }
 
     this.length++
   }
 
-  // Add node at the beginning of the list
+  /* Add a new node to the beginning of the linked list */
   prepend(value) {
-    let currentNode = this.headNode
-    const node = new Node(value, currentNode)
-    this.headNode = node
+    const newNode = new Node(value, this.headNode)
+    this.headNode = newNode
     this.length++
   }
 
-  // Return total number of nodes in the list
+  /* Return the number of nodes in the linked list */
   size() {
     return this.length
   }
 
-  // Return first node in the list
+  /* Return the head node of the linked list */
   head() {
-    return this.headNode.value
+    return this.headNode
   }
 
-  // Returns the last node in the list
+  /* Return the last node of the linked list */
   tail() {
     let currentNode = this.headNode
+
+    if (!currentNode) {
+      return null
+    }
 
     while (currentNode.nextNode) {
       currentNode = currentNode.nextNode
     }
-    return currentNode.value
+
+    return currentNode
   }
 
-  // Returns the node at a given index
+  /* Returns the node at the given index */
   at(index) {
     let currentNode = this.headNode
     let currentIndex = 0
@@ -64,17 +67,17 @@ export default class LinkedList {
     if (index < currentIndex || index === this.length) {
       return null
     } else if (index === currentIndex) {
-      return currentNode.value
+      return currentNode
     } else {
       while (currentIndex < index) {
         currentIndex++
         currentNode = currentNode.nextNode
       }
-      return currentNode.value
+      return currentNode
     }
   }
 
-  // Remove last node in the list
+  /* Remove the last node in the linked list */
   pop() {
     if (!this.length) {
       return null
@@ -94,85 +97,81 @@ export default class LinkedList {
     this.length--
   }
 
-  // Returns true if the value is in the list
+  /* Return true if the linked list contains the given value, false otherwise */
   contains(value) {
-    if (!this.length) {
-      return false
-    } else if (this.length === 1 && this.headNode.value === value) {
-      return true
-    } else {
-      let currentNode = this.headNode
-
-      while (currentNode) {
-        if (currentNode.value === value) {
-          return true
-        } else {
-          currentNode = currentNode.nextNode
-        }
-      }
-      return false
-    }
-  }
-
-  // Return the index of node which contains the given value
-  find(value) {
-    if (!this.length) {
-      return null
-    } else {
-      let currentNode = this.headNode
-      let currentIndex = 0
-
-      while (currentNode) {
-        if (currentNode.value === value) {
-          return currentIndex
-        } else {
-          currentIndex++
-          currentNode = currentNode.nextNode
-        }
-      }
-      return null
-    }
-  }
-
-  // Print all values in the list in a specific format
-  toString() {
-    let linkedListString = ''
     let currentNode = this.headNode
 
     while (currentNode) {
-      let currentValue = currentNode.value
-      linkedListString += `(${currentValue}) -> `
+      if (currentNode.value === value) {
+        return true
+      }
+
       currentNode = currentNode.nextNode
     }
 
-    linkedListString += `${currentNode}`
-    console.log(linkedListString)
+    return false
   }
 
-  // Insert node at given index
-  insertAt(value, index) {
-    const node = new Node(value)
+  /* Searches for the first occurrence of a node with the specified value */
+  find(value) {
     let currentNode = this.headNode
-    let previousNode
     let currentIndex = 0
 
-    if (index < currentIndex || index > this.length) {
-      return null
-    } else if (index === 0) {
-      this.headNode = node
-      node.nextNode = currentNode
-    } else {
-      while (currentIndex < index) {
-        currentIndex++
-        previousNode = currentNode
-        currentNode = currentNode.nextNode
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return currentIndex
       }
-      previousNode.nextNode = node
-      node.nextNode = currentNode
+
+      currentIndex++
+      currentNode = currentNode.nextNode
     }
+
+    return null
   }
 
-  // Remove node at a given index
+  /* Returns a string representation of all values in the list */
+  toString() {
+    let result = ''
+    let currentNode = this.headNode
+
+    while (currentNode) {
+      result += `( ${currentNode.value} ) -> `
+      currentNode = currentNode.nextNode
+    }
+
+    result += 'null'
+    return result
+  }
+
+  /* Inserts a new node with the given value at the specified index in the linked list */
+  insertAt(value, index) {
+    const newNode = new Node(value)
+    let currentNode = this.headNode
+    let previousNode = null
+    let currentIndex = 0
+
+    if (index < 0 || index > this.length) {
+      return null
+    }
+
+    if (index === 0) {
+      newNode.nextNode = currentNode
+      this.headNode = newNode
+    } else {
+      while (currentIndex < index) {
+        previousNode = currentNode
+        currentNode = currentNode.nextNode
+        currentIndex++
+      }
+      newNode.nextNode = currentNode
+      previousNode.nextNode = newNode
+    }
+
+    this.length++
+  }
+
+
+  /* Removes the node at the specified index from the linked lis */
   removeAt(index) {
     let currentNode = this.headNode
     let previousNode
@@ -180,15 +179,20 @@ export default class LinkedList {
 
     if (index < 0 || index >= this.length) {
       return null
-    } else if (index === currentIndex) {
+    }
+
+    if (index === 0) {
       this.headNode = currentNode.nextNode
     } else {
       while (currentIndex < index) {
-        currentIndex++
         previousNode = currentNode
         currentNode = currentNode.nextNode
+        currentIndex++
       }
+
       previousNode.nextNode = currentNode.nextNode
     }
+
+    this.length--
   }
 }

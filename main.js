@@ -1,19 +1,16 @@
+// Import the LinkedList class
 import LinkedList from './linked-list.js'
 
-const ll = new LinkedList()
-ll.append(10)
-ll.append(20)
-ll.append(30)
-ll.append(40)
-// console.log(ll.size())
-// console.log(ll.head())
-// console.log(ll.tail())
-// console.log(ll.at(4))
-// console.log(ll.contains(20))
-// console.log(ll.find(50))
+// Create a linked list
+const list = new LinkedList();
+// Add some items
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
 
-// ll.insertAt(50, 5)
-ll.removeAt(4)
-ll.toString()
-
+// Print the linked list
+console.log(list.toString())
 // console.dir(ll, { depth: null })
